@@ -516,9 +516,60 @@ h1, h2, h3 {
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+    .container {
+        padding: 1.5rem;
+        gap: 3rem;
+    }
+    .title { font-size: 3rem; }
+    .highlight { font-size: 3.5rem; }
+}
+
 @media (max-width: 600px) {
-    .title { font-size: 2.5rem; }
-    .highlight { font-size: 3rem; }
-    .wish-input-group { flex-direction: column; }
-    .action-btn { width: 100%; }
+    .container {
+        padding: 1rem;
+        gap: 2.5rem;
+    }
+    .title { font-size: 2.2rem; }
+    .highlight { font-size: 2.6rem; }
+    
+    .message-block {
+        padding: 1.2rem;
+    }
+    
+    #personal-message {
+        font-size: 1.1rem;
+    }
+
+    #music-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    #secret-star {
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .action-btn { 
+        width: 100%; 
+        font-size: 1.1rem;
+        padding: 0.8rem 1rem;
+    }
+    
+    .gift-surprise {
+        width: 240px;
+        padding: 1rem;
+    }
+
+    .generator-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    #generator-display {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
 }
