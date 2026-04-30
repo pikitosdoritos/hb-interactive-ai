@@ -22,27 +22,49 @@ document.addEventListener('DOMContentLoaded', () => {
         bgContainer.appendChild(shape);
     }
 
-    // --- Background Music Toggle ---
+    // --- Background Music Logic ---
     const musicBtn = document.getElementById('music-btn');
     const bgMusic = document.getElementById('bg-music');
     const musicIcon = document.getElementById('music-icon');
     let isMusicPlaying = false;
 
-    // Try setting volume lower so it's not too loud
     bgMusic.volume = 0.4;
 
-    musicBtn.addEventListener('click', () => {
+    function updateMusicButtonState(playing) {
+        isMusicPlaying = playing;
+        if (playing) {
+            musicBtn.innerHTML = '<span id="music-icon">🔊</span> Music On';
+        } else {
+            musicBtn.innerHTML = '<span id="music-icon">🎵</span> Music Off';
+        }
+    }
+
+    // Try to autoplay via JS on load
+    bgMusic.play().then(() => {
+        updateMusicButtonState(true);
+    }).catch((e) => {
+        console.log("Autoplay blocked. Waiting for interaction.");
+    });
+
+    // Fallback: Start on first interaction anywhere on screen if not playing
+    const startMusicFallback = () => {
+        if (!isMusicPlaying) {
+            bgMusic.play().then(() => updateMusicButtonState(true)).catch(e => console.log(e));
+        }
+    };
+    
+    window.addEventListener('click', startMusicFallback, { once: true });
+    window.addEventListener('touchstart', startMusicFallback, { once: true });
+    window.addEventListener('keydown', startMusicFallback, { once: true });
+
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent triggering the body click above at the same time
         if (isMusicPlaying) {
             bgMusic.pause();
-            musicIcon.textContent = '🎵';
-            musicBtn.innerHTML = '<span id="music-icon">🎵</span> Music Off';
+            updateMusicButtonState(false);
         } else {
-            // Browsers require interaction before playing audio
-            bgMusic.play().catch(e => console.log("Audio play failed:", e));
-            musicIcon.textContent = '🔊';
-            musicBtn.innerHTML = '<span id="music-icon">🔊</span> Music On';
+            bgMusic.play().then(() => updateMusicButtonState(true)).catch(e => console.log("Audio play failed:", e));
         }
-        isMusicPlaying = !isMusicPlaying;
     });
 
     // --- Generate Cake Candles ---
