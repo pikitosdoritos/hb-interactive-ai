@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 10th Birthday!</title>
+    <meta name="description" content="A magical interactive birthday greeting for a 10-year-old girl!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Floating Elements Container -->
+    <div id="floating-bg"></div>
+
+    <!-- Background Music Toggle -->
+    <button id="music-btn" class="glass-btn">
+        <span id="music-icon">🎵</span> Music Off
+    </button>
+    <audio id="bg-music" loop>
+        <!-- Placeholder audio - users can replace this file -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_27319c5c2d.mp3?filename=happy-and-joyful-children-1136.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Secret Easter Egg -->
+    <div id="secret-star" title="Shh... it's a secret!">⭐</div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="title animate-pop">Happy <span class="highlight">10th</span> Birthday!</h1>
+            <div class="message-block animate-slide-up">
+                <p id="personal-message" contenteditable="true" spellcheck="false">
+                    You bring so much joy and magic into the world! May your double-digit birthday be filled with fun, laughter, and endless surprises! Click here to edit this message. ✨
+                </p>
+                <div class="edit-hint">✎ Click the text above to write your own message</div>
+            </div>
+        </section>
+
+        <!-- Birthday Cake Section -->
+        <section class="cake-section">
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="candle-container" id="candles">
+                        <!-- Candles added by JS -->
+                    </div>
+                    <div class="frosting"></div>
+                    <div class="cake-layer bottom"></div>
+                    <div class="cake-layer top"></div>
+                </div>
+            </div>
+            <button id="blow-candles-btn" class="action-btn">Blow Out Candles 💨</button>
+        </section>
+
+        <!-- Gift Section -->
+        <section class="gift-section">
+            <div class="gift-container" id="gift-box">
+                <div class="gift-lid">
+                    <div class="bow"></div>
+                </div>
+                <div class="gift-base"></div>
+                <div class="gift-surprise hidden" id="gift-surprise">
+                    <h3>🎉 Surprise! 🎉</h3>
+                    <p>You are officially amazing!</p>
+                </div>
+            </div>
+            <button id="open-gift-btn" class="action-btn">Open Your Gift 🎁</button>
+        </section>
+
+        <!-- Make a Wish Section -->
+        <section class="wish-section">
+            <div class="wish-card glass-panel">
+                <h2>Make a Wish 🌠</h2>
+                <div class="wish-input-group">
+                    <input type="text" id="wish-input" placeholder="Type your biggest wish here...">
+                    <button id="make-wish-btn" class="action-btn small">Wish!</button>
+                </div>
+                <div id="wish-display" class="hidden"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Balloons Container -->
+    <div id="balloons-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
