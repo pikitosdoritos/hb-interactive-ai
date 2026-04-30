@@ -27,6 +27,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><text x='0' y='20' style='font-size:20px'>✨</text></svg>"), auto;
 }
 
 h1, h2, h3 {
@@ -181,7 +182,7 @@ h1, h2, h3 {
     font-size: 1.2rem;
     font-family: 'Fredoka', sans-serif;
     border-radius: 50px;
-    cursor: pointer;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><text x='0' y='20' style='font-size:20px'>🪄</text></svg>"), pointer;
     box-shadow: 0 4px 15px rgba(255, 183, 178, 0.5);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: block;
@@ -396,55 +397,39 @@ h1, h2, h3 {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: 280px;
     background: white;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 15px;
     box-shadow: var(--shadow);
-    z-index: 1;
+    z-index: 10;
     opacity: 0;
     transition: all 0.5s ease;
 }
 
 .gift-container.opened .gift-surprise {
-    top: -80px;
+    top: -140px;
     opacity: 1;
     animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Wish Section */
-.wish-card {
+/* Magic Generator Section */
+.generator-card {
     padding: 2rem;
     text-align: center;
 }
 
-.wish-input-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 1.5rem;
-}
-
-#wish-input {
-    flex: 1;
-    padding: 0.8rem 1.2rem;
-    border: 2px solid var(--accent);
-    border-radius: 50px;
-    font-size: 1rem;
-    font-family: 'Quicksand', sans-serif;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-#wish-input:focus {
-    border-color: var(--primary);
-}
-
-#wish-display {
-    margin-top: 1.5rem;
-    font-size: 1.3rem;
+#generator-display {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
     font-family: 'Pacifico', cursive;
     color: var(--primary-dark);
-    min-height: 40px;
+    min-height: 60px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 /* Balloons */

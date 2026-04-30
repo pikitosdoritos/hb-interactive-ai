@@ -111,37 +111,106 @@ document.addEventListener('DOMContentLoaded', () => {
         openGiftBtn.click();
     });
 
-    // --- Make a Wish ---
-    const wishInput = document.getElementById('wish-input');
-    const makeWishBtn = document.getElementById('make-wish-btn');
-    const wishDisplay = document.getElementById('wish-display');
+    // --- Magic Generator ---
+    const generateBtn = document.getElementById('generate-btn');
+    const generatorDisplay = document.getElementById('generator-display');
 
-    makeWishBtn.addEventListener('click', processWish);
-    wishInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') processWish();
+    const wishes = [
+        "Нехай кожен день буде сповнений магії! ✨",
+        "Ти здатна на неймовірні речі! 🌟",
+        "Сьогодні твій день — насолоджуйся кожною миттю! 🎂",
+        "Твоя усмішка робить світ світлішим! 💖",
+        "Попереду в тебе стільки цікавих пригод! 🗺️",
+        "Завжди вір у себе, бо ти — унікальна! 🌈",
+        "Нехай твої мрії збуваються швидше, ніж ти їх загадуєш! 🚀",
+        "Навколо тебе завжди відбуваються дива! 🦋"
+    ];
+
+    generateBtn.addEventListener('click', () => {
+        const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+        
+        generatorDisplay.textContent = randomWish;
+        generatorDisplay.classList.remove('hidden');
+        generatorDisplay.classList.remove('animate-pop');
+        // Trigger reflow to restart animation
+        void generatorDisplay.offsetWidth;
+        generatorDisplay.classList.add('animate-pop');
+        
+        // Little stars
+        fireConfetti({
+            particleCount: 40,
+            spread: 60,
+            origin: { y: 0.8 },
+            colors: ['#cbaacb', '#ffb7b2', '#9dbad5', '#ffd700'] 
+        });
     });
 
-    function processWish() {
-        const text = wishInput.value.trim();
-        if (text) {
-            wishDisplay.textContent = `✨ "${text}" ✨`;
-            wishDisplay.classList.remove('hidden');
-            wishDisplay.classList.remove('animate-pop');
-            // Trigger reflow to restart animation
-            void wishDisplay.offsetWidth;
-            wishDisplay.classList.add('animate-pop');
-            
-            wishInput.value = '';
-            
-            // Little stars from the wish
-            fireConfetti({
-                particleCount: 30,
-                spread: 50,
-                origin: { y: 0.8 },
-                colors: ['#FFD700', '#ffffff'] // Gold and white
+    // --- Personal Message Fireworks ---
+    const personalMessage = document.getElementById('personal-message');
+    let msgFireworksInterval;
+
+    personalMessage.addEventListener('mouseenter', (e) => {
+        // Only trigger if not already firing
+        if (msgFireworksInterval) return;
+        
+        const duration = 2000;
+        const end = Date.now() + duration;
+
+        msgFireworksInterval = setInterval(() => {
+            if (Date.now() > end) {
+                clearInterval(msgFireworksInterval);
+                msgFireworksInterval = null;
+                return;
+            }
+            // Small bursts from the edges of the screen
+            confetti({
+                particleCount: 10,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0.2, y: 0.4 },
+                colors: ['#ffb7b2', '#ffd700']
             });
+            confetti({
+                particleCount: 10,
+                angle: 120,
+                spread: 55,
+                origin: { x: 0.8, y: 0.4 },
+                colors: ['#cbaacb', '#9dbad5']
+            });
+        }, 200);
+    });
+
+    personalMessage.addEventListener('mouseleave', () => {
+        if (msgFireworksInterval) {
+            clearInterval(msgFireworksInterval);
+            msgFireworksInterval = null;
         }
-    }
+    });
+
+    // --- Magical Mouse Trail ---
+    document.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.85) { // Throttle trail density
+            const star = document.createElement('div');
+            star.textContent = ['✨', '⭐', '💖', '🪄'][Math.floor(Math.random() * 4)];
+            star.style.position = 'fixed';
+            star.style.left = (e.clientX - 10) + 'px';
+            star.style.top = (e.clientY - 10) + 'px';
+            star.style.pointerEvents = 'none';
+            star.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            star.style.opacity = '0.8';
+            star.style.zIndex = '9999';
+            star.style.transition = 'all 1s ease-out';
+            document.body.appendChild(star);
+            
+            // Wait for next frame to trigger transition
+            requestAnimationFrame(() => {
+                star.style.transform = `translate(${Math.random() * 50 - 25}px, ${Math.random() * 50 + 25}px) scale(0)`;
+                star.style.opacity = '0';
+            });
+            
+            setTimeout(() => star.remove(), 1000);
+        }
+    });
 
     // --- Web Audio API for Pop Sound ---
     let audioCtx;

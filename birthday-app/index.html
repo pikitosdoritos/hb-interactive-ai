@@ -39,7 +39,7 @@
         <section class="hero">
             <h1 class="title animate-pop">Happy <span class="highlight">10th</span> Birthday!</h1>
             <div class="message-block animate-slide-up">
-                <p id="personal-message" contenteditable="true" spellcheck="false">
+                <p id="personal-message">
                     Машо, вітаю тебе з 10-річчям! 🎉
                     Це особливий день — перша справжня кругла дата, і нехай вона запам’ятається чимось дуже яскравим і
                     радісним.
@@ -54,7 +54,6 @@
                     Залишайся такою ж яскравою, розумною і справжньою.
                     З Днем народження! 🎂✨
                 </p>
-                <div class="edit-hint">✎ Click the text above to write your own message</div>
             </div>
         </section>
 
@@ -89,15 +88,13 @@
             <button id="open-gift-btn" class="action-btn">Open Your Gift 🎁</button>
         </section>
 
-        <!-- Make a Wish Section -->
-        <section class="wish-section">
-            <div class="wish-card glass-panel">
-                <h2>Make a Wish 🌠</h2>
-                <div class="wish-input-group">
-                    <input type="text" id="wish-input" placeholder="Type your biggest wish here...">
-                    <button id="make-wish-btn" class="action-btn small">Wish!</button>
-                </div>
-                <div id="wish-display" class="hidden"></div>
+        <!-- Magic Generator Section -->
+        <section class="generator-section">
+            <div class="generator-card glass-panel">
+                <h2>Генератор Радості ✨</h2>
+                <p style="margin-top: 10px; color: #888;">Натисни кнопку, щоб отримати особливе передбачення або побажання!</p>
+                <button id="generate-btn" class="action-btn small" style="margin-top: 1.5rem;">Що на мене чекає? 🔮</button>
+                <div id="generator-display" class="hidden"></div>
             </div>
         </section>
     </main>
